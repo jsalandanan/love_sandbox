@@ -9,6 +9,7 @@ function love.load()
 
   stage:addGameObject(player)
   stage:addGameObject(enemy)
+  stage:addGameObject(Enemy(400, 300))
 end
 
 function love.draw()

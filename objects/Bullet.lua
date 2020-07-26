@@ -10,7 +10,7 @@ function Bullet:new(x, y)
   self.width = 10
   self.height = 15
 
-  -- condition for removal
+  self.damage = 25
 end
 
 function Bullet:update(dt)
@@ -36,8 +36,10 @@ function Bullet:checkCollision(obj)
     self_left < obj_right and
     self_bottom > obj_top and
     self_top < obj_bottom then
-        print('collision!')
         self.dead = true
+
+        obj.hp = obj.hp - self.damage
+        print(obj.hp)
 
         --Increase enemy speed
         -- obj.speed = obj.speed + 50
