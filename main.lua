@@ -1,11 +1,14 @@
 Player = require 'objects/Player'
 Stage = require 'objects/Stage'
+Enemy = require 'objects/Enemy'
 
 function love.load()
   stage = Stage()
   player = Player(0, 0)
+  enemy = Enemy(300, 400)
 
   stage:addGameObject(player)
+  stage:addGameObject(enemy)
 end
 
 function love.draw()
