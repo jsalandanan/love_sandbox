@@ -1,4 +1,5 @@
 Object = require 'libraries/classic/classic'
+Bullet = require 'objects/Bullet'
 
 local Stage = Object:extend()
 
@@ -9,6 +10,9 @@ end
 function Stage:update(dt)
   for _, gameObject in ipairs(self.gameObjects) do
     gameObject:update(dt)
+    if gameObject:is(Bullet) then
+      gameObject:checkCollision(enemy) -- need to change this
+    end
   end
 end
 
