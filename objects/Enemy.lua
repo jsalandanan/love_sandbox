@@ -25,4 +25,8 @@ end
 function Enemy:collide(obj)
 end
 
+function Enemy:die()
+  self.dead = true
+end
+
 return Enemy

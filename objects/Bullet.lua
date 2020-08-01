@@ -26,9 +26,13 @@ function Bullet:draw()
 end
 
 function Bullet:collide(obj)
-        self.dead = true
-        obj.hp = obj.hp - self.damage
-        print(obj.hp)
+  obj.hp = obj.hp - self.damage
+  print(obj.hp)
+end
+
+function Bullet:die()
+  self.dead = true
+  print('oh wow!')
 end
 
 return Bullet

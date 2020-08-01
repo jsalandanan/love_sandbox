@@ -47,7 +47,11 @@ function Player:shoot()
 end
 
 function Player:collide(obj)
+  self:die()
+end
 
+function Player:die()
+  self.dead = true
 end
 
 return Player
