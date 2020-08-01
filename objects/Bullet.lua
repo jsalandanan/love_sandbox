@@ -17,7 +17,26 @@ end
 function Bullet:update(dt)
   Bullet.super.update(self, dt)
   self.y = self.y + self.speed * dt
+  if not self:inBounds() then
+    self:die()
+  end
 
+end
+
+function Bullet:inBounds()
+  if self.x < 0 then
+    return false
+  end
+  if self.y < 0 then
+    return false
+  end
+  if self.x > gw then
+    return false
+  end
+  if self.y > gh then
+    return false
+  end
+  return true
 end
 
 function Bullet:draw()
@@ -28,11 +47,12 @@ end
 function Bullet:collide(obj)
   obj.hp = obj.hp - self.damage
   print(obj.hp)
+  self:die()
 end
 
 function Bullet:die()
-  self.dead = true
   print('oh wow!')
+  self.dead = true
 end
 
 return Bullet
