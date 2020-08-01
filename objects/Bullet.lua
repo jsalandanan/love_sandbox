@@ -18,17 +18,6 @@ function Bullet:update(dt)
   Bullet.super.update(self, dt)
   self.y = self.y + self.speed * dt
 
-  -- call stage queryCircleArea on self position
-  -- for returned list, check collisions against collidables
-  -- on first collision, run collide
-  nearbyObjects = self.stage:queryCircleArea(self.x, self.y, 50, self.collidables)
-  for _, object in ipairs(nearbyObjects) do
-    what = self:checkCollision(object)
-    if self:checkCollision(object) then
-      self:collide(object)
-    end
-  end
-
 end
 
 function Bullet:draw()

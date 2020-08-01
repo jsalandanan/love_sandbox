@@ -2,8 +2,8 @@ GameObject = require 'objects/GameObject'
 
 local Enemy = GameObject:extend()
 
-function Enemy:new(x, y, stage)
-  Enemy.super.new(self, x, y, stage)
+function Enemy:new(x, y, stage, collidables)
+  Enemy.super.new(self, x, y, stage, {Player})
 
   self.width = 50
   self.height = 50
@@ -20,6 +20,9 @@ end
 function Enemy:draw()
   Enemy.super.draw(self)
   love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
+end
+
+function Enemy:collide(obj)
 end
 
 return Enemy

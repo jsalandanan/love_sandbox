@@ -4,8 +4,8 @@ Bullet = require 'objects/Bullet'
 
 local Player = GameObject:extend()
 
-function Player:new(x, y, stage)
-  Player.super.new(self, x, y, stage)
+function Player:new(x, y, stage, collidables)
+  Player.super.new(self, x, y, stage, {Enemy})
 
   self.timer = Timer()
 
@@ -44,6 +44,10 @@ end
 function Player:shoot()
   bullet = Bullet(self.x, self.y, self.stage, {Enemy})
   self.stage:addGameObject(bullet)  -- not a fan
+end
+
+function Player:collide(obj)
+
 end
 
 return Player

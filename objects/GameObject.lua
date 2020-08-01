@@ -3,16 +3,24 @@ Timer = require 'libraries/hump/timer'
 
 local GameObject = Object:extend()
 
-function GameObject:new(x, y, stage)
+function GameObject:new(x, y, stage, collidables)
     self.x = x
     self.y = y
     self.stage = stage
+    self.collidables = collidables
     self.creation_time = love.timer.getTime()
     self.dead = false
 end
 
 function GameObject:update(dt)
-    if self.timer then self.timer:update(dt) end
+  if self.timer then self.timer:update(dt) end
+  nearbyObjects = self.stage:queryCircleArea(self.x, self.y, 50, self.collidables)
+  for _, object in ipairs(nearbyObjects) do
+    what = self:checkCollision(object)
+    if self:checkCollision(object) then
+      self:collide(object)
+    end
+  end
 end
 
 function GameObject:draw()
