@@ -36,6 +36,13 @@ function Stage:update(dt)
   end
 end
 
+-- bullets can collide with enemies if they're from the player,
+-- and with the Player if they're from enemies
+-- now that a bullet has access to its stage, it need only get all objects of that class
+-- in an area around it, no?
+-- with an array of such objects, it can check collision against collidable classes
+-- calling an onCollide method if so (which will handle killing the bullet and doing damage)
+
 function Stage:draw()
   for _, gameObject in ipairs(self.gameObjects) do
     gameObject:draw()
@@ -56,6 +63,5 @@ end
 function Stage:addEnemy(enemy)
   table.insert(self.enemies, enemy)
 end
-
 
 return Stage

@@ -1,10 +1,9 @@
-Object = require 'libraries/classic/classic'
+GameObject = require 'objects/GameObject'
 
-local Bullet = Object:extend()
+local Bullet = GameObject:extend()
 
-function Bullet:new(x, y)
-  self.x = x
-  self.y = y
+function Bullet:new(x, y, stage)
+  Bullet.super.new(self, x, y, stage)
 
   self.speed = 40
   self.width = 10
@@ -14,10 +13,12 @@ function Bullet:new(x, y)
 end
 
 function Bullet:update(dt)
+  Bullet.super.update(self, dt)
   self.y = self.y + self.speed * dt
 end
 
 function Bullet:draw()
+  Bullet.super.draw(self)
   love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
 end
 

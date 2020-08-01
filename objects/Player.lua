@@ -1,12 +1,11 @@
-Object = require 'libraries/classic/classic'
+GameObject = require 'objects/GameObject'
 Timer = require 'libraries/hump/timer'
 Bullet = require 'objects/Bullet'
 
-local Player = Object:extend()
+local Player = GameObject:extend()
 
-function Player:new(x, y)
-  self.x = x
-  self.y = y
+function Player:new(x, y, stage)
+  Player.super.new(self, x, y, stage)
 
   self.timer = Timer()
 
@@ -20,11 +19,13 @@ function Player:new(x, y)
 end
 
 function Player:update(dt)
+  Player.super.update(self, dt)
   self:handle_movement(dt)
   if self.timer then self.timer:update(dt) end
 end
 
 function Player:draw()
+  Player.super.draw(self)
   love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 end
 
@@ -42,7 +43,7 @@ end
 
 function Player:shoot()
   bullet = Bullet(self.x, self.y)
-  stage:addGameObject(bullet)  -- not a fan
+  self.stage:addGameObject(bullet)  -- not a fan
 end
 
 return Player
