@@ -42,7 +42,7 @@ function Player:handle_movement(dt)
 end
 
 function Player:shoot()
-  bullet = Bullet(self.x, self.y)
+  bullet = Bullet(self.x, self.y, self.stage, {Enemy})
   self.stage:addGameObject(bullet)  -- not a fan
 end
 

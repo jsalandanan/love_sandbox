@@ -10,9 +10,6 @@ function Enemy:new(x, y, stage)
   self.color = nil  -- might want to differentiate
   self.hp = 100
 
-  self.dead = false
-
-  -- condition for removal
 end
 
 function Enemy:update(dt)

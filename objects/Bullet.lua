@@ -2,19 +2,33 @@ GameObject = require 'objects/GameObject'
 
 local Bullet = GameObject:extend()
 
-function Bullet:new(x, y, stage)
+function Bullet:new(x, y, stage, collidables)
   Bullet.super.new(self, x, y, stage)
+
+  self.collidables = collidables
 
   self.speed = 40
   self.width = 10
   self.height = 15
-
   self.damage = 25
+
 end
 
 function Bullet:update(dt)
   Bullet.super.update(self, dt)
   self.y = self.y + self.speed * dt
+
+  -- call stage queryCircleArea on self position
+  -- for returned list, check collisions against collidables
+  -- on first collision, run collide
+  nearbyObjects = self.stage:queryCircleArea(self.x, self.y, 50, self.collidables)
+  for _, object in ipairs(nearbyObjects) do
+    what = self:checkCollision(object)
+    if self:checkCollision(object) then
+      self:collide(object)
+    end
+  end
+
 end
 
 function Bullet:draw()
@@ -22,29 +36,10 @@ function Bullet:draw()
   love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
 end
 
-function Bullet:checkCollision(obj)
-    local self_left = self.x
-    local self_right = self.x + self.width
-    local self_top = self.y
-    local self_bottom = self.y + self.height
-
-    local obj_left = obj.x
-    local obj_right = obj.x + obj.width
-    local obj_top = obj.y
-    local obj_bottom = obj.y + obj.height
-
-    if self_right > obj_left and
-    self_left < obj_right and
-    self_bottom > obj_top and
-    self_top < obj_bottom then
+function Bullet:collide(obj)
         self.dead = true
-
         obj.hp = obj.hp - self.damage
         print(obj.hp)
-
-        --Increase enemy speed
-        -- obj.speed = obj.speed + 50
-    end
 end
 
 return Bullet
