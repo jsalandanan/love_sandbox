@@ -12,7 +12,7 @@ function Player:new(x, y, stage, collidables)
   self.width = 50
   self.height = 50
   self.speed = 300
-  self.rateOfFire = 0.25  -- in seconds
+  self.rateOfFire = 0.5  -- in seconds
 
   self.timer:every(self.rateOfFire, function() self:shoot() end)
 
