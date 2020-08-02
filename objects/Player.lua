@@ -12,15 +12,15 @@ function Player:new(x, y, stage, collidables)
   self.width = 50
   self.height = 50
   self.speed = 300
-  self.rateOfFire = 0.5  -- in seconds
-
-  self.timer:every(self.rateOfFire, function() self:shoot() end)
+  self.rateOfFire = 0.1
+  self.delay = 0
 
 end
 
 function Player:update(dt)
   Player.super.update(self, dt)
   self:handle_movement(dt)
+  self:handle_shooting(dt)
   if self.timer then self.timer:update(dt) end
 end
 
@@ -38,6 +38,19 @@ function Player:handle_movement(dt)
     self.y = math.min(self.y + self.speed * dt, gh-self.height)
   elseif love.keyboard.isDown('w') or love.keyboard.isDown('up') then
     self.y = math.max(self.y - self.speed * dt, 0)
+  end
+end
+
+function Player:handle_shooting(dt)
+  if love.keyboard.isDown('z') then
+    if self.delay <= 0 then
+      self:shoot()
+      self.delay = 1
+    else
+      self.delay = self.delay - dt * 5
+    end
+  else
+    self.delay = 0
   end
 end
 
