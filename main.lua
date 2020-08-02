@@ -4,7 +4,7 @@ Enemy = require 'objects/Enemy'
 
 function love.load()
   stage = Stage()
-  player = Player(0, 0, stage)
+  player = Player(gw/2, gh-50, stage)
   enemy = Enemy(300, 400, stage)
 
   stage:addGameObject(player)

@@ -7,7 +7,7 @@ function Bullet:new(x, y, stage, collidables)
 
   self.collidables = collidables
 
-  self.speed = 40
+  self.speed = 100
   self.width = 10
   self.height = 15
   self.damage = 25
@@ -16,7 +16,7 @@ end
 
 function Bullet:update(dt)
   Bullet.super.update(self, dt)
-  self.y = self.y + self.speed * dt
+  self.y = self.y - self.speed * dt
   if not self:inBounds() then
     self:die()
   end
@@ -51,7 +51,6 @@ function Bullet:collide(obj)
 end
 
 function Bullet:die()
-  print('oh wow!')
   self.dead = true
 end
 
