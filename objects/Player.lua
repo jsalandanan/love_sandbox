@@ -14,6 +14,7 @@ function Player:new(x, y, stage, collidables)
   self.speed = 300
   self.rateOfFire = 0.1
   self.delay = 0
+  self.hp = 1
 
 end
 
@@ -22,6 +23,7 @@ function Player:update(dt)
   self:handle_movement(dt)
   self:handle_shooting(dt)
   if self.timer then self.timer:update(dt) end
+  if self.hp <= 0 then self:die() end
 end
 
 function Player:draw()
@@ -54,8 +56,13 @@ function Player:handle_shooting(dt)
   end
 end
 
+function Player:aim()
+  return self.x, 0
+end
+
 function Player:shoot()
-  bullet = Bullet(self.x, self.y, self.stage, {Enemy})
+  local target_x, target_y = self:aim()
+  bullet = Bullet(self.x, self.y, self.stage, self.collidables, target_x, target_y)
   self.stage:addGameObject(bullet)  -- not a fan
 end
 

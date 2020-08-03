@@ -7,19 +7,23 @@ function Enemy:new(x, y, stage, collidables)
 
   self.width = 50
   self.height = 50
-  self.color = nil  -- might want to differentiate
+  self.red = 0
+  self.green = 0
+  self.blue = 0
   self.hp = 100
 
 end
 
 function Enemy:update(dt)
   Enemy.super.update(self, dt)
-  if self.hp <= 0 then self.dead = true end
+  if self.hp <= 0 then self:die() end
 end
 
 function Enemy:draw()
   Enemy.super.draw(self)
+  love.graphics.setColor(self.red, self.green, self.blue)
   love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
+  love.graphics.reset()
 end
 
 function Enemy:collide(obj)
