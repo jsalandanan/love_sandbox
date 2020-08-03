@@ -1,16 +1,32 @@
 Object = require 'libraries/classic/classic'
+Timer = require 'libraries/hump/timer'
 Bullet = require 'objects/Bullet'
-Enemy = require 'objects/Enemy'
+ShootingEnemy = require 'objects/ShootingEnemy'
 
 local Stage = Object:extend()
 
 function Stage:new()
   -- might be better suited as a table of tables
   self.gameObjects = {}
+
+
+  -- use a timer to orchestrate enemy spawning?
+  self.timer = Timer()
+  self:stagePlan(timer)
 end
+
+-- given a timer, create a plan to spawn waves of enemies?
+function Stage:stagePlan(timer)
+  self.timer:after(2, function()
+    self:addGameObject(ShootingEnemy(400, 150, stage))
+    self:addGameObject(ShootingEnemy(300, 200, stage))
+  end)
+end
+
 
 -- bullets should check collision against enemies in an immediate area
 function Stage:update(dt)
+  self.timer:update(dt)
   for i = #self.gameObjects, 1, -1 do
     local gameObject = self.gameObjects[i]
     gameObject:update(dt)

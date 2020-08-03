@@ -5,11 +5,7 @@ ShootingEnemy = require 'objects/ShootingEnemy'
 function love.load()
   stage = Stage()
   player = Player(gw/2, gh-50, stage)
-  enemy = ShootingEnemy(300, 200, stage)
-
   stage:addGameObject(player)
-  stage:addGameObject(enemy)
-  stage:addGameObject(ShootingEnemy(400, 150, stage))
 end
 
 function love.draw()
