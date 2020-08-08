@@ -1,5 +1,6 @@
 Object = require 'libraries/classic/classic'
 Timer = require 'libraries/hump/timer'
+Player = require 'objects/Player'
 Bullet = require 'objects/Bullet'
 ShootingEnemy = require 'objects/ShootingEnemy'
 Wave = require 'objects/Wave'

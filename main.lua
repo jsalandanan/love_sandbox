@@ -1,4 +1,3 @@
-Player = require 'objects/Player'
 Stage = require 'objects/Stage'
 ShootingEnemy = require 'objects/ShootingEnemy'
 
@@ -9,7 +8,7 @@ function love.load()
           {ShootingEnemy, 400, -50},
           {ShootingEnemy, 300, -50},
         },
-        100
+        14
       ),
     Wave(
         {

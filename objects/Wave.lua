@@ -1,6 +1,5 @@
 Object = require 'libraries/classic/classic'
 
-
 local Wave = Object:extend()
 
 function Wave:new(enemy_details, duration)
@@ -35,9 +34,9 @@ function Wave:update(dt)
 end
 
 function Wave:checkIsOver()
-  if self.duration <= 0 then
-    self.over = true
-  elseif self:numEnemies() == 0 then
+  -- if self.duration <= 0 then
+  --   self.over = true
+  if self:numEnemies() == 0 then
     self.over = true
   end
 end
