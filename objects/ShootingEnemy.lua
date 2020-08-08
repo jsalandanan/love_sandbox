@@ -16,11 +16,24 @@ function ShootingEnemy:new(x, y, stage, collidables)
   self.delay = 0
   self.rateOfFire = 5
 
+  self.shooting = false
+
+  self:behavior()
+
+end
+
+function ShootingEnemy:behavior()
+  self.timer:after(2, function()
+    self.timer:tween(2, self, {y = 150}, 'in-out-cubic')
+    self.shooting = true
+  end)
 end
 
 function ShootingEnemy:update(dt)
   ShootingEnemy.super.update(self, dt)
-  self:handle_shooting(dt)
+  if self.shooting then
+    self:handle_shooting(dt)
+  end
 end
 
 function ShootingEnemy:draw()
