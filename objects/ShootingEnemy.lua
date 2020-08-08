@@ -1,4 +1,5 @@
 Enemy = require 'objects/Enemy'
+Bullet = require 'objects/Bullet'
 
 local ShootingEnemy = Enemy:extend()
 
@@ -24,8 +25,7 @@ end
 
 function ShootingEnemy:behavior()
   self.timer:after(2, function()
-    self.timer:tween(2, self, {y = 150}, 'in-out-cubic')
-    self.shooting = true
+    self.timer:tween(2, self, {y = 150}, 'in-out-cubic', function() self.shooting = true end)
   end)
 end
 
@@ -50,7 +50,7 @@ end
 function ShootingEnemy:handle_shooting(dt)
   local target_x, target_y = self:aim()
   if self.delay <= 0 then
-    bullet = Bullet(self.x, self.y, self.stage, self.collidables, target_x, target_y)
+    local bullet = Bullet(self.x, self.y, self.stage, self.collidables, target_x, target_y)
     self.stage:addGameObject(bullet)
     self.delay = self.rateOfFire
   else
