@@ -2,31 +2,67 @@ Object = require 'libraries/classic/classic'
 Timer = require 'libraries/hump/timer'
 Bullet = require 'objects/Bullet'
 ShootingEnemy = require 'objects/ShootingEnemy'
+Wave = require 'objects/Wave'
 
 local Stage = Object:extend()
 
 function Stage:new()
   -- might be better suited as a table of tables
   self.gameObjects = {}
-
-
-  -- use a timer to orchestrate enemy spawning?
+  self.stagePlan = nil
   self.timer = Timer()
-  self:stagePlan(timer)
+
+  self.waves = {
+    Wave(
+        {
+          {ShootingEnemy, 400, -50},
+          {ShootingEnemy, 300, -50},
+        },
+        100 -- duration
+      ),
+    Wave(
+        {
+          {ShootingEnemy, 350, -50},
+        },
+        100 -- duration
+      ),
+  }
+
+  self.currentWave = nil
+  self:getNextWave()
+
 end
 
--- given a timer, create a plan to spawn waves of enemies?
-function Stage:stagePlan(timer)
-  self.timer:after(2, function()
-    self:addGameObject(ShootingEnemy(400, 150, stage))
-    self:addGameObject(ShootingEnemy(300, 200, stage))
-  end)
+function Stage:processWave(wave)
+  for i = #wave.enemy_details, 1, -1 do
+    local enemy_detail = wave.enemy_details[i]
+    local EnemyClass, x, y = unpack(enemy_detail)
+    local enemy = EnemyClass(x, y, self)
+    self:addGameObject(enemy)
+    wave:addEnemy(enemy)
+  end
 end
 
+-- revisit performance due to nature of "popping"
+function Stage:getNextWave()
+  self.currentWave = table.remove(self.waves, 1)
+  self:processWave(self.currentWave)
+end
 
--- bullets should check collision against enemies in an immediate area
+function Stage:updateWave()
+  if not self.currentWave then
+    self.currentWave = self.waves[1]
+  end
+end
+
 function Stage:update(dt)
   self.timer:update(dt)
+
+  self.currentWave:update(dt)
+  if self.currentWave.over then
+    self:getNextWave()
+  end
+
   for i = #self.gameObjects, 1, -1 do
     local gameObject = self.gameObjects[i]
     gameObject:update(dt)
@@ -36,13 +72,6 @@ function Stage:update(dt)
   end
 end
 
--- bullets can collide with enemies if they're from the player,
--- and with the Player if they're from enemies
--- now that a bullet has access to its stage, it need only get all objects of that class
--- in an area around it, no?
--- with an array of such objects, it can check collision against collidable classes
--- calling an onCollide method if so (which will handle killing the bullet and doing damage)
-
 function Stage:draw()
   for _, gameObject in ipairs(self.gameObjects) do
     gameObject:draw()
@@ -51,6 +80,10 @@ end
 
 function Stage:addGameObject(gameObject)
     table.insert(self.gameObjects, gameObject)
+end
+
+function Stage:addStagePlan(stagePlan)
+  self.stagePlan = stagePlan
 end
 
 function Stage:queryCircleArea(x, y, radius, targetClasses)

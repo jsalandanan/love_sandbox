@@ -4,6 +4,7 @@ ShootingEnemy = require 'objects/ShootingEnemy'
 
 function love.load()
   stage = Stage()
+  -- level1 = StagePlan('placeholder', stage)
   player = Player(gw/2, gh-50, stage)
   stage:addGameObject(player)
 end
