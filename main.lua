@@ -3,10 +3,22 @@ Stage = require 'objects/Stage'
 ShootingEnemy = require 'objects/ShootingEnemy'
 
 function love.load()
-  stage = Stage()
-  -- level1 = StagePlan('placeholder', stage)
-  player = Player(gw/2, gh-50, stage)
-  stage:addGameObject(player)
+  local waves = {
+    Wave(
+        {
+          {ShootingEnemy, 400, -50},
+          {ShootingEnemy, 300, -50},
+        },
+        100
+      ),
+    Wave(
+        {
+          {ShootingEnemy, 350, -50},
+        },
+        100
+      ),
+  }
+  stage = Stage(waves)
 end
 
 function love.draw()

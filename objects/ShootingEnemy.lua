@@ -44,8 +44,7 @@ function ShootingEnemy:collide(obj)
 end
 
 function ShootingEnemy:aim()
-  -- figure out how to access this properly
-  return player.x, player.y
+  return self.stage:retrievePlayerCoordinates()
 end
 
 function ShootingEnemy:handle_shooting(dt)

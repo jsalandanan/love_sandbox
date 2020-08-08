@@ -6,28 +6,16 @@ Wave = require 'objects/Wave'
 
 local Stage = Object:extend()
 
-function Stage:new()
+function Stage:new(waves)
   -- might be better suited as a table of tables
   self.gameObjects = {}
   self.stagePlan = nil
   self.timer = Timer()
 
-  self.waves = {
-    Wave(
-        {
-          {ShootingEnemy, 400, -50},
-          {ShootingEnemy, 300, -50},
-        },
-        100 -- duration
-      ),
-    Wave(
-        {
-          {ShootingEnemy, 350, -50},
-        },
-        100 -- duration
-      ),
-  }
+  self.player = Player(gw/2, gh-50, self)
+  self:addGameObject(self.player)
 
+  self.waves = waves
   self.currentWave = nil
   self:getNextWave()
 
@@ -41,6 +29,10 @@ function Stage:processWave(wave)
     self:addGameObject(enemy)
     wave:addEnemy(enemy)
   end
+end
+
+function Stage:retrievePlayerCoordinates()
+  return self.player.x, self.player.y
 end
 
 -- revisit performance due to nature of "popping"
