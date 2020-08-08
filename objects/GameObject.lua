@@ -27,6 +27,23 @@ end
 function GameObject:draw()
 end
 
+function GameObject:inBounds()
+  if self.x < 0 then
+    return false
+  end
+  if self.y < 0 then
+    return false
+  end
+  if self.x > gw then
+    return false
+  end
+  if self.y > gh then
+    return false
+  end
+  return true
+end
+
+
 function GameObject:checkCollision(obj)
     local self_left = self.x
     local self_right = self.x + self.width

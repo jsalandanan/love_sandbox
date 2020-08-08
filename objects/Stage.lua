@@ -38,7 +38,9 @@ end
 
 -- revisit performance due to nature of "popping"
 function Stage:getNextWave()
+  print(#self.waves)
   self.currentWave = table.remove(self.waves, 1)
+  print(#self.waves)
   self:processWave(self.currentWave)
 end
 

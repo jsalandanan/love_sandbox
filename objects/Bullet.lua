@@ -31,25 +31,6 @@ function Bullet:update(dt)
   end
 end
 
--- bullets need to arbitrarily move to point at speed
--- for now, assume a single point
-
-function Bullet:inBounds()
-  if self.x < 0 then
-    return false
-  end
-  if self.y < 0 then
-    return false
-  end
-  if self.x > gw then
-    return false
-  end
-  if self.y > gh then
-    return false
-  end
-  return true
-end
-
 function Bullet:draw()
   Bullet.super.draw(self)
   love.graphics.rectangle('line', self.x, self.y, self.width, self.height)

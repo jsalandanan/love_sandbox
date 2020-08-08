@@ -1,5 +1,6 @@
 Stage = require 'objects/Stage'
 ShootingEnemy = require 'objects/ShootingEnemy'
+RammingEnemy = require 'objects/RammingEnemy'
 
 function love.load()
   local waves = {
@@ -16,6 +17,13 @@ function love.load()
         },
         100
       ),
+    Wave(
+        {
+          {RammingEnemy, 50, -50},
+          {ShootingEnemy, 450, -50},
+        },
+        100
+      )
   }
   stage = Stage(waves)
 end
