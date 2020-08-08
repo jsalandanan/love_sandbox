@@ -57,7 +57,6 @@ end
 
 function Bullet:collide(obj)
   obj.hp = obj.hp - self.damage
-  print(obj.hp)
   self:die()
 end
 

@@ -10,6 +10,7 @@ function GameObject:new(x, y, stage, collidables)
     self.collidables = collidables
     self.creation_time = love.timer.getTime()
     self.dead = false
+    self.timer = Timer()
 end
 
 function GameObject:update(dt)
