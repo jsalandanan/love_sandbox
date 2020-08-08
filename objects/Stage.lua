@@ -38,9 +38,7 @@ end
 
 -- revisit performance due to nature of "popping"
 function Stage:getNextWave()
-  print(#self.waves)
   self.currentWave = table.remove(self.waves, 1)
-  print(#self.waves)
   self:processWave(self.currentWave)
 end
 
@@ -55,7 +53,11 @@ function Stage:update(dt)
 
   self.currentWave:update(dt)
   if self.currentWave.over then
-    self:getNextWave()
+    if #self.waves ~= 0 then
+      self:getNextWave()
+    else
+      print('You win!')
+    end
   end
 
   for i = #self.gameObjects, 1, -1 do
