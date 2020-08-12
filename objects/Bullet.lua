@@ -36,6 +36,7 @@ function Bullet:draw()
 end
 
 function Bullet:collide(obj)
+  Bullet.super.collide(obj)
   obj.hp = obj.hp - self.damage
   love.audio.stop(bullet_sound)
   love.audio.play(bullet_sound)

@@ -27,6 +27,11 @@ end
 function GameObject:draw()
 end
 
+function GameObject:collide(obj)
+  print(self, 'collided with', obj)
+end
+
+
 function GameObject:__tostring()
   return "GameObject"
 end

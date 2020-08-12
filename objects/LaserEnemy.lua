@@ -42,6 +42,7 @@ function LaserEnemy:draw()
 end
 
 function LaserEnemy:collide(obj)
+  LaserEnemy.super.collide(obj)
 end
 
 function LaserEnemy:handle_shooting(dt)
