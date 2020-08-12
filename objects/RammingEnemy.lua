@@ -58,11 +58,6 @@ function RammingEnemy:collide(obj)
   obj.hp = obj.hp - self.damage
 end
 
-function Bullet:collide(obj)
-  obj.hp = obj.hp - self.damage
-  self:die()
-end
-
 function RammingEnemy:aim()
   return self.stage:retrievePlayerCoordinates()
 end
