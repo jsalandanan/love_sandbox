@@ -29,6 +29,10 @@ end
 function Enemy:collide(obj)
 end
 
+function Enemy:__tostring()
+  return "Enemy"
+end
+
 function Enemy:die()
   self.dead = true
 end

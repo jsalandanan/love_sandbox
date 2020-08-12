@@ -42,6 +42,11 @@ function Bullet:collide(obj)
   self:die()
 end
 
+function Bullet:__tostring()
+  return "Bullet"
+end
+
+
 function Bullet:die()
   self.dead = true
 end

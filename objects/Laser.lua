@@ -27,7 +27,6 @@ function Laser:draw()
 end
 
 function Laser:collide(obj)
-  print('clearly this isnt happening')
   obj.hp = obj.hp - self.damage
 end
 

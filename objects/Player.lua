@@ -31,6 +31,10 @@ function Player:draw()
   love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 end
 
+function Player:__tostring()
+  return "Player"
+end
+
 function Player:handle_movement(dt)
   if love.keyboard.isDown('d') or love.keyboard.isDown('right') then
     self.x = math.min(self.x + self.speed * dt, gw-self.width)
