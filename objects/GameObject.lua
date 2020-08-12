@@ -18,7 +18,6 @@ function GameObject:update(dt)
   local nearbyObjects = self.stage:queryCircleArea(self.x, self.y, 500, self.collidables)
   -- local nearbyObjects = self.stage.gameObjects
   for _, object in ipairs(nearbyObjects) do
-    what = self:checkCollision(object)
     if self:checkCollision(object) then
       self:collide(object)
     end

@@ -16,7 +16,7 @@ end
 
 function Laser:update(dt)
   self.duration = self.duration - dt
-  print(self.duration)
+  -- print(self.duration)
   if self.duration <= 0 then self:die() end
   Laser.super.update(self, dt)
 end

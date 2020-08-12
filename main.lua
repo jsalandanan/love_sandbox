@@ -4,6 +4,9 @@ RammingEnemy = require 'objects/RammingEnemy'
 LaserEnemy = require 'objects/LaserEnemy'
 
 function love.load()
+  bullet_sound = love.audio.newSource('sounds/thud.wav', 'static')
+  bullet_sound:setVolume(0.2)
+
   local waves = {
     Wave(
         {

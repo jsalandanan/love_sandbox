@@ -14,7 +14,6 @@ function Bullet:new(x, y, stage, collidables, target_x, target_y)
   self.height = 15
   self.damage = 25
 
-
   self.angle = math.atan2((self.target_y - self.y), (self.target_x - self.x))
 
   self.dx = self.speed * math.cos(self.angle)
@@ -38,6 +37,8 @@ end
 
 function Bullet:collide(obj)
   obj.hp = obj.hp - self.damage
+  love.audio.stop(bullet_sound)
+  love.audio.play(bullet_sound)
   self:die()
 end
 
