@@ -38,6 +38,7 @@ end
 function Bullet:collide(obj)
   Bullet.super.collide(obj)
   obj.hp = obj.hp - self.damage
+  if obj:is(FirstBoss) then print(obj.hp) end
   love.audio.stop(bullet_sound)
   love.audio.play(bullet_sound)
   self:die()
