@@ -38,11 +38,14 @@ end
 function Player:handle_movement(dt)
   if love.keyboard.isDown('d') or love.keyboard.isDown('right') then
     self.x = math.min(self.x + self.speed * dt, gw-self.width)
-  elseif love.keyboard.isDown('a') or love.keyboard.isDown('left') then
+  end
+  if love.keyboard.isDown('a') or love.keyboard.isDown('left') then
     self.x = math.max(self.x - self.speed * dt, 0)
-  elseif love.keyboard.isDown('s') or love.keyboard.isDown('down') then
+  end
+  if love.keyboard.isDown('s') or love.keyboard.isDown('down') then
     self.y = math.min(self.y + self.speed * dt, gh-self.height)
-  elseif love.keyboard.isDown('w') or love.keyboard.isDown('up') then
+  end
+  if love.keyboard.isDown('w') or love.keyboard.isDown('up') then
     self.y = math.max(self.y - self.speed * dt, 0)
   end
 end
